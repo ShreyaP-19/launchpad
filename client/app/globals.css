@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #F97316;
+  --color-primary-dark: #EA580C;
+  --color-primary-light: #FDBA74;
+  --color-accent: #0EA5E9;
+  --color-accent-dark: #0284C7;
+  --color-cream: #FFF7ED;
+  --color-dark: #0F172A;
+  --color-dark-light: #1E293B;
+
+  --shadow-orange-glow: 0 0 20px -5px rgba(249, 115, 22, 0.5);
+  --shadow-accent-glow: 0 0 20px -5px rgba(14, 165, 233, 0.5);
+  --shadow-premium: 0 10px 40px -10px rgba(15, 23, 42, 0.1);
+
+  --font-display: 'Outfit', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+}
+
+:root {
+  --background: #FFF7ED;
+  --foreground: #0F172A;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  letter-spacing: -0.025em;
+  color: var(--color-dark);
+}
+
+.orange-button {
+  @apply relative overflow-hidden bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-orange-glow active:scale-95;
+}
+
+.accent-button {
+  @apply relative overflow-hidden bg-white text-dark font-bold py-3 px-8 rounded-full border border-orange-100 hover:border-primary transition-all duration-300 shadow-sm hover:shadow-premium active:scale-95;
+}
+
+.glass-card {
+  @apply bg-white/70 backdrop-blur-md border border-white/50 rounded-3xl p-8 shadow-premium hover:shadow-2xl hover:border-orange-200 transition-all duration-500 hover:-translate-y-1;
+}
+
+.nav-link {
+  @apply text-dark/70 hover:text-primary transition-colors font-medium flex items-center space-x-1 py-2 px-1 relative;
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300;
+}
+
+.nav-link:hover::after {
+  @apply w-full;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary-dark to-primary;
+  background-size: 200% auto;
+  animation: shine 4s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.bg-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgba(249, 115, 22, 0.05) 1px, transparent 0);
+  background-size: 40px 40px;
+}
