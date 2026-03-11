@@ -121,7 +121,7 @@ export default function Home() {
           <div className="bg-dark rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl">
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px]" />
             <div className="relative z-10">
-              <h2 className="text-4xl md:text-6xl font-white text-primary mb-8 tracking-tight">Ready to launch your career?</h2>
+              <h2 className="text-4xl md:text-6xl !text-white font-bold mb-8 tracking-tight">Ready to launch your career?</h2>
               <p className="text-xl text-white/60 mb-12 max-w-2xl mx-auto">
                 Join thousands of students who are already building the future of humanity in space.
               </p>
