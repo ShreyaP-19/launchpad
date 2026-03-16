@@ -20,7 +20,11 @@ export const AuthProvider = ({ children }) => {
     const login = (userData) => {
         localStorage.setItem('userInfo', JSON.stringify(userData));
         setUser(userData);
-        router.push('/dashboard');
+        if (userData.role === 'admin') {
+            router.push('/admin');
+        } else {
+            router.push('/dashboard');
+        }
     };
 
     const logout = () => {

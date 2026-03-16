@@ -26,14 +26,18 @@ export default function Navbar() {
                     <div className="hidden md:flex items-center space-x-8">
                         {user ? (
                             <>
-                                <Link href="/dashboard" className="nav-link">
-                                    <LayoutDashboard className="w-4 h-4" />
-                                    <span>Dashboard</span>
-                                </Link>
-                                <Link href="/courses" className="nav-link">
-                                    <BookOpen className="w-4 h-4" />
-                                    <span>Programs</span>
-                                </Link>
+                                {user.role !== 'admin' && (
+                                    <>
+                                        <Link href="/dashboard" className="nav-link">
+                                            <LayoutDashboard className="w-4 h-4" />
+                                            <span>Dashboard</span>
+                                        </Link>
+                                        <Link href="/courses" className="nav-link">
+                                            <BookOpen className="w-4 h-4" />
+                                            <span>Programs</span>
+                                        </Link>
+                                    </>
+                                )}
                                 {user.role === 'admin' && (
                                     <Link href="/admin" className="text-primary hover:text-primary-dark font-bold text-sm tracking-widest uppercase">
                                         Admin
@@ -41,7 +45,9 @@ export default function Navbar() {
                                 )}
                                 <div className="flex items-center space-x-4 ml-4 pl-6 border-l border-orange-100">
                                     <div className="text-right">
-                                        <p className="text-xs text-dark/40 font-bold uppercase tracking-tighter">Student</p>
+                                        <p className="text-xs text-dark/40 font-bold uppercase tracking-tighter">
+                                            {user.role === 'admin' ? 'Admin' : 'Student'}
+                                        </p>
                                         <p className="text-sm font-bold text-dark">{user.name}</p>
                                     </div>
                                     <button
@@ -84,8 +90,12 @@ export default function Navbar() {
                         <div className="px-4 pt-2 pb-6 space-y-2">
                             {user ? (
                                 <>
-                                    <Link href="/dashboard" className="block py-3 px-4 rounded-xl hover:bg-orange-50 text-dark font-medium transition-colors">Dashboard</Link>
-                                    <Link href="/courses" className="block py-3 px-4 rounded-xl hover:bg-orange-50 text-dark font-medium transition-colors">Programs</Link>
+                                    {user.role !== 'admin' && (
+                                        <>
+                                            <Link href="/dashboard" className="block py-3 px-4 rounded-xl hover:bg-orange-50 text-dark font-medium transition-colors">Dashboard</Link>
+                                            <Link href="/courses" className="block py-3 px-4 rounded-xl hover:bg-orange-50 text-dark font-medium transition-colors">Programs</Link>
+                                        </>
+                                    )}
                                     <button onClick={logout} className="w-full text-left py-3 px-4 rounded-xl hover:bg-red-50 text-red-500 font-medium transition-colors">Logout</button>
                                 </>
                             ) : (
