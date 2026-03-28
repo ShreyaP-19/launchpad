@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         localStorage.removeItem('userInfo');
         setUser(null);
-        router.push('/login');
+        window.location.replace('/login');
     };
 
     return (

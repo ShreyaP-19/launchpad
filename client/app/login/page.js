@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { authService } from '@/services/api';
@@ -12,6 +12,15 @@ export default function Login() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const { login } = useAuth();
+
+    useEffect(() => {
+        window.history.pushState(null, "", window.location.href);
+        const handlePopState = () => {
+            window.history.pushState(null, "", window.location.href);
+        };
+        window.addEventListener('popstate', handlePopState);
+        return () => window.removeEventListener('popstate', handlePopState);
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

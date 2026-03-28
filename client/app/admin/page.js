@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { courseService } from '@/services/api';
 import Navbar from '@/components/Navbar';
@@ -10,6 +11,13 @@ export default function AdminPanel() {
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showForm, setShowForm] = useState(false);
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!authLoading && !user) {
+            router.replace('/login');
+        }
+    }, [user, authLoading, router]);
     const [formData, setFormData] = useState({
         title: '',
         description: '',
@@ -64,7 +72,7 @@ export default function AdminPanel() {
         setFormData({ ...formData, category: cat, price });
     };
 
-    if (authLoading) return null;
+    if (authLoading || !user) return null;
     if (user?.role !== 'admin') {
         return <div className="p-20 text-center font-bold text-red-500">Access Denied</div>;
     }

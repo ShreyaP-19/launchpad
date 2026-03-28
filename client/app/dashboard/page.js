@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { courseService } from '@/services/api';
 import Navbar from '@/components/Navbar';
@@ -10,6 +11,13 @@ export default function Dashboard() {
     const { user, loading: authLoading } = useAuth();
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!authLoading && !user) {
+            router.replace('/login');
+        }
+    }, [user, authLoading, router]);
 
     useEffect(() => {
         if (user) {
@@ -28,7 +36,7 @@ export default function Dashboard() {
         }
     };
 
-    if (authLoading) return null;
+    if (authLoading || !user) return null;
 
     return (
         <div className="min-h-screen bg-cream">
